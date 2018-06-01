@@ -1,7 +1,11 @@
 <template>
   <div class="hello">
+    <!-- message to be translated -->
     <h1>{{ $t("message.hello") }}</h1>
+    <!-- switch between locales -->
+    <button v-on:click="switchLocale()">{{ displayLocale }}</button>
     <br>
+
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -91,6 +95,24 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    switchLocale () {
+      if (this.$i18n.locale === 'de') {
+        this.$i18n.locale = 'en'
+      } else {
+        this.$i18n.locale = 'de'
+      }
+    }
+  },
+  computed: {
+    displayLocale () {
+      let other = 'en'
+      if (this.$i18n.locale === 'en') {
+        other = 'de'
+      }
+      return other
     }
   }
 }
